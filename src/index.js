@@ -7,7 +7,7 @@ let itemNumber = 23;
 function Hi() {
   return (
     <div>
-      Hello <strong> Malik! </strong>
+      Hello <strong> Raza! </strong>
       <h1>some heading</h1>
       <ul className="myList" id="23">
         <li>abc item 1</li>
