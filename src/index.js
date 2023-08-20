@@ -4,21 +4,21 @@ import "./index.css";
 
 let itemNumber = 23;
 
-function Hi() {
+function Hi(props) {
   return (
     <div>
-      Hello <strong> Raza! </strong>
-      <h1>some heading</h1>
+      Hello <strong> {props.name} </strong>
+      <h1>This is My First React App</h1>
       <ul className="myList" id="23">
-        <li>abc item 1</li>
-        <li>abc item 2</li>
-        <li>abc item 3</li>
-        <li>abc item 4</li>
-        <li>abc item {5 + 10}</li>
-        <li>abc item {++itemNumber}</li>
+        <li>Item Number 1</li>
+        <li>Item Number 2</li>
+        <li>Item Number 3</li>
+        <li>Item Number 4</li>
+        <li>Item Number {5 + 10}</li>
+        <li>Item Number {++itemNumber}</li>
       </ul>
     </div>
   );
 }
 
-ReactDOM.render(<Hi />, document.querySelector("#root"));
+ReactDOM.render(<Hi name="Raza"/>, document.querySelector("#root"));
