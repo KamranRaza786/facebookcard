@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 
+<<<<<<< HEAD
 const Post = ({name, logo, subtitle,reference, time, thumb, content,title, text}) => (
       <div className="f-card">
       <div className="header">
@@ -22,6 +23,47 @@ const Post = ({name, logo, subtitle,reference, time, thumb, content,title, text}
           <div className="reference-title">{title}</div>
           <div className="reference-subtitle">{subtitle}</div>
           <div className="reference-font">{reference}</div>
+=======
+//function Hi(props) {
+// return (
+//   <div>
+//    Hello <strong> {props.name} </strong>
+//    <h1>This is My First React App</h1>
+//    <ul className="myList" id="23">
+//      <li>Item Number 1</li>
+//      <li>Item Number 2</li>
+//     <li>Item Number 3</li>
+//     <li>Item Number 4</li>
+//     <li>Item Number {5 + 10}</li>
+//     <li>Item Number {++itemNumber}</li>
+//   </ul>
+// </div>
+//);
+//}
+
+//ReactDOM.render(<Hi name="Raza"/>, document.querySelector("#root"));
+
+function Post(props) {
+  return (
+    <div className="f-card">
+      <div className="header">
+        <div className="options"><i className="fa fa-chevron-down"></i></div>
+        <img className="co-logo" src={props.logo} alt=""></img>
+        <div className="co-name"><a href="https://react-app-a89bc.web.app/">{props.name}</a></div>
+        <div className="time"><a href="https://react-app-a89bc.web.app/">{props.time}</a> · <i className="fa fa-globe"></i></div>
+      </div>
+      <div className="content">
+        <p>{props.content}
+          <a href="https://react-app-a89bc.web.app/"> {props.text} </a> See More</p>
+      </div>
+
+      <div className="reference">
+        <img className="reference-thumb" src={props.thumb} alt="" />
+        <div className="reference-content">
+          <div className="reference-title">{props.title}</div>
+          <div className="reference-subtitle">{props.subtitle}</div>
+          <div className="reference-font">{props.reference}</div>
+>>>>>>> 9ff388e9ef5afd17915d18dd0e8e51376acbcf5c
         </div>
       </div>
       <div className="social">
@@ -32,8 +74,22 @@ const Post = ({name, logo, subtitle,reference, time, thumb, content,title, text}
           <span><i className="fa fa-share"></i>Share</span></div>
       </div>
     </div>
+<<<<<<< HEAD
    
+=======
+    //<div className="facebookpost">
+    //      <h3>{props.name}</h3>
+    //     <span>3 july</span>
+    //     <p>{props.text}</p>
+    //     <img width={200} src={props.imgUrl}alt=""></img>
+    //     <br></br>
+    //    <button>Like</button>
+    //    <button>Comment</button>
+    //    <button>Share</button>
+    //   </div>
+>>>>>>> 9ff388e9ef5afd17915d18dd0e8e51376acbcf5c
   );
+
 
 ReactDOM.render(
   <div>
