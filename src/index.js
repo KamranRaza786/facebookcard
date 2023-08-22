@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './index.css'; 
 
+
 function App() {
   const [isLightOn, setIsLightOn] = useState(false);
   const [temperature, setTemperature] = useState(72);
@@ -32,5 +33,6 @@ function App() {
       </div>
     </div>
   );
+}
 
 export default App;
