@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import './index.css'; 
 
-<<<<<<< HEAD
 function App() {
   const [isLightOn, setIsLightOn] = useState(false);
   const [temperature, setTemperature] = useState(72);
-=======
->>>>>>> 7c4fd6136cbb87c614de6c21bdb891a101e2e762
 
   const handleLightToggle = () => {
     setIsLightOn(prevIsLightOn => !prevIsLightOn);
@@ -34,10 +31,6 @@ function App() {
         <button onClick={decreaseTemperature} className="temp-button">-</button>
       </div>
     </div>
-<<<<<<< HEAD
-=======
-   
->>>>>>> 7c4fd6136cbb87c614de6c21bdb891a101e2e762
   );
 
 export default App;
