@@ -74,20 +74,7 @@ function Post(props) {
           <span><i className="fa fa-share"></i>Share</span></div>
       </div>
     </div>
-<<<<<<< HEAD
    
-=======
-    //<div className="facebookpost">
-    //      <h3>{props.name}</h3>
-    //     <span>3 july</span>
-    //     <p>{props.text}</p>
-    //     <img width={200} src={props.imgUrl}alt=""></img>
-    //     <br></br>
-    //    <button>Like</button>
-    //    <button>Comment</button>
-    //    <button>Share</button>
-    //   </div>
->>>>>>> 9ff388e9ef5afd17915d18dd0e8e51376acbcf5c
   );
 
 
