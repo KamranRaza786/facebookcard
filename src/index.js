@@ -3,27 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 
-<<<<<<< HEAD
-const Post = ({name, logo, subtitle,reference, time, thumb, content,title, text}) => (
-      <div className="f-card">
-      <div className="header">
-        <div className="options"><i className="fa fa-chevron-down"></i></div>
-        <img className="co-logo" src={logo} alt=""></img>
-        <div className="co-name"><a href="https://react-app-a89bc.web.app/">{name}</a></div>
-        <div className="time"><a href="https://react-app-a89bc.web.app/">{time}</a> · <i className="fa fa-globe"></i></div>
-      </div>
-      <div className="content">
-        <p>{content}
-          <a href="https://react-app-a89bc.web.app/"> {text} </a> See More</p>
-      </div>
-
-      <div className="reference">
-        <img className="reference-thumb" src={thumb} alt="" />
-        <div className="reference-content">
-          <div className="reference-title">{title}</div>
-          <div className="reference-subtitle">{subtitle}</div>
-          <div className="reference-font">{reference}</div>
-=======
 //function Hi(props) {
 // return (
 //   <div>
@@ -63,7 +42,6 @@ function Post(props) {
           <div className="reference-title">{props.title}</div>
           <div className="reference-subtitle">{props.subtitle}</div>
           <div className="reference-font">{props.reference}</div>
->>>>>>> 9ff388e9ef5afd17915d18dd0e8e51376acbcf5c
         </div>
       </div>
       <div className="social">
