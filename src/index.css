@@ -158,3 +158,22 @@ cursor:pointer;
 .social-buttons span i {
 padding-right:4px;
 }
+
+
+html,
+body,
+#root,
+.room {
+  height: 100%;
+  margin: 0;
+}
+
+.lit {
+  background-color: white;
+  color: black;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
