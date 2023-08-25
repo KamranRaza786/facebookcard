@@ -1,137 +1,186 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-//let itemNumber = 23;
+const Home = () => {
+	const [isDay, setDay] = useState(true);
+	const [isLightOn, setIsLightOn] = useState(false);
+	const [temperature, setTemperature] = useState(72);
+	const [temperatureScale, setTemperatureScale] = useState('F'); // Default to Fahrenheit
 
-//function Hi(props) {
-// return (
-//   <div>
-//    Hello <strong> {props.name} </strong>
-//    <h1>This is My First React App</h1>
-//    <ul className="myList" id="23">
-//      <li>Item Number 1</li>
-//      <li>Item Number 2</li>
-//     <li>Item Number 3</li>
-//     <li>Item Number 4</li>
-//     <li>Item Number {5 + 10}</li>
-//     <li>Item Number {++itemNumber}</li>
-//   </ul>
-// </div>
-//);
-//}
+	const handleLightToggle = () => {
+		setIsLightOn(prevIsLightOn => !prevIsLightOn);
+	};
 
-//ReactDOM.render(<Hi name="Raza"/>, document.querySelector("#root"));
+	const convertToFahrenheit = celsius => (celsius * 9) / 5 + 32;
+	const convertToCelsius = fahrenheit => ((fahrenheit - 32) * 5) / 9;
 
-function Post(props) {
-  return (
-    <div className="f-card">
-      <div className="header">
-        <div className="options"><i className="fa fa-chevron-down"></i></div>
-        <img className="co-logo" src={props.logo} alt=""></img>
-        <div className="co-name"><a href="https://react-app-a89bc.web.app/">{props.name}</a></div>
-        <div className="time"><a href="https://react-app-a89bc.web.app/">{props.time}</a> · <i className="fa fa-globe"></i></div>
-      </div>
-      <div className="content">
-        <p>{props.content}
-          <a href="https://react-app-a89bc.web.app/"> {props.text} </a> See More</p>
-      </div>
+	const increaseTemperature = () => {
+		setTemperature(prevTemp => {
+			const newTemp = prevTemp + 1;
+			return temperatureScale === 'F' ? newTemp : convertToFahrenheit(newTemp);
+		});
+	};
 
-      <div className="reference">
-        <img className="reference-thumb" src={props.thumb} alt="" />
-        <div className="reference-content">
-          <div className="reference-title">{props.title}</div>
-          <div className="reference-subtitle">{props.subtitle}</div>
-          <div className="reference-font">{props.reference}</div>
-        </div>
-      </div>
-      <div className="social">
-        <div className="social-content"></div>
-        <div className="social-buttons">
-          <span><i className="fa fa-thumbs-up"></i>Like</span>
-          <span><i className="fa fa-comment"></i>Comment</span>
-          <span><i className="fa fa-share"></i>Share</span></div>
-      </div>
-    </div>
-    //<div className="facebookpost">
-    //      <h3>{props.name}</h3>
-    //     <span>3 july</span>
-    //     <p>{props.text}</p>
-    //     <img width={200} src={props.imgUrl}alt=""></img>
-    //     <br></br>
-    //    <button>Like</button>
-    //    <button>Comment</button>
-    //    <button>Share</button>
-    //   </div>
-  );
+	const decreaseTemperature = () => {
+		setTemperature(prevTemp => {
+			const newTemp = prevTemp - 1;
+			return temperatureScale === 'F' ? newTemp : convertToFahrenheit(newTemp);
+		});
+	};
+
+	return (
+		<div className={`room ${isDay ? 'day' : 'night'}`}>
+			<p>
+				<h1>There is {isDay ? 'Day' : 'Night'}</h1>
+			</p>
+
+			<button onClick={() => setDay(!isDay)}>
+				Set {isDay ? 'Night' : 'Day'}
+			</button>
+			<div className="container">
+				<div className="controls">
+					<button
+						onClick={handleLightToggle}
+						className={`toggle-button ${isLightOn ? 'on' : 'off'}`}
+					>
+						{isLightOn ? 'Turn OFF' : 'Turn ON'}
+					</button>
+					<p className="status">Light Status: {isLightOn ? 'ON' : 'OFF'}</p>
+				</div>
+				<div className="temperature-controls">
+					<p className="temperature">
+						<h2>Room Temperature: {temperature}°{temperatureScale}</h2>
+						<h2>Temperature in Celsius: {convertToCelsius(temperature).toFixed(2)}°C</h2>
+					</p>
+
+					<button onClick={increaseTemperature} className="temp-button">
+						<h2> + </h2>
+					</button>
+					<button onClick={decreaseTemperature} className="temp-button">
+						<h2> - </h2>
+					</button>
+					<button onClick={() => setTemperatureScale('F')} className="scale-button">
+						Fahrenheit
+					</button>
+					<button onClick={() => setTemperatureScale('C')} className="scale-button">
+						Celsius
+					</button>
+				</div>
+			</div>
+			<Clock />
+			<CountdownTimer />
+		</div>
+	);
+};
+
+const Time = props => {
+	const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	const dayOfWeek = daysOfWeek[props.passDate.getDay()];
+
+	return (
+		<div className="mt-3">
+			<h2>{props.passDate.toLocaleTimeString()}</h2>
+			<h5 className="mt-2">{props.toggleDate && `${dayOfWeek}, ${props.passDate.toLocaleDateString()}`}</h5>
+		</div>
+	);
+};
+
+const Toggle = props => {
+	return (
+		<div className="form-check form-check-inline">
+			<input
+				className="form-check-input"
+				type="checkbox"
+				id="toggle-date"
+				checked={props.dateValue}
+				onChange={props.toggleDate}
+			/>
+			<label
+				className="form-check-label"
+				htmlFor="toggle-date"
+				style={{ cursor: 'pointer', userSelect: 'none' }}
+			>
+				{props.dateValue ? 'Hide' : 'Show'} Date
+			</label>
+		</div>
+	);
+};
+
+class Clock extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentDate: new Date(),
+			toggleDate: false,
+		};
+
+		this.toggleDate = this.toggleDate.bind(this);
+	}
+
+	componentDidMount() {
+		this.intervalDate = setInterval(() => this.updateDate(), 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.intervalDate);
+	}
+
+	updateDate() {
+		this.setState({
+			currentDate: new Date(),
+		});
+	}
+
+	toggleDate() {
+		this.setState(prevState => ({
+			toggleDate: !prevState.toggleDate,
+		}));
+	}
+
+	render() {
+		return (
+			<div className="container py-5">
+				<div className="jumbotron text-center bg-white shadow-lg">
+					<Toggle toggleDate={this.toggleDate} dateValue={this.state.toggleDate} />
+					<Time passDate={this.state.currentDate} toggleDate={this.state.toggleDate} />
+				</div>
+			</div>
+		);
+	}
 }
 
+const CountdownTimer = () => {
+	const [count, setCount] = useState(10);
+	const [paused, setPaused] = useState(true);
 
-ReactDOM.render(
-  <div>
-    <Post
-      title={"My first Firebase Hosting Assignment.| REACT APP"}
-      post={"https://assets.thehansindia.com/h-upload/2022/06/10/1297107-robbo.webp"}
-      logo={"https://uploads-ssl.webflow.com/646218c67da47160c64a84d5/64634bf6bf1d95ef8010e208_86.png"}
-      name={"Salman Javeed"}
-      time={"2h"}
-      content={"a well-organized and reputed organization where I can utilize all my efforts"}
-      thumb={"https://assets.thehansindia.com/h-upload/2022/06/10/1297107-robbo.webp"}
-      text={"Google Firebase Console"}
-      subtitle={"Azure ChatGPT: Private and secure ChatGPT for internal enterprise use"}
-      reference={"ABC Refrence"}
-    />
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			if (!paused) {
+				setCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
+			}
+		}, 1000);
 
-    <Post
-      title={"My first Firebase Hosting Assignment.| REACT APP"}
-      post={"https://www.elegantthemes.com/blog/wp-content/uploads/2023/06/What-is-AI-1.jpg"}
-      logo={"https://uploads-ssl.webflow.com/646218c67da47160c64a84d5/64634a2e52ad093eec7cec96_83.png"}
-      name={"Kashif Amin"}
-      time={"3h"}
-      content={"a well-organized and reputed organization where I can utilize all my efforts"}
-      thumb={"https://www.elegantthemes.com/blog/wp-content/uploads/2023/06/What-is-AI-1.jpg"}
-      text={"Google Firebase Console"}
-      subtitle={"ChatGPT clone made with MERN and uses OpenAI API"}
-      reference={"ABC Refrence"}
-    />
+		return () => clearInterval(intervalId);
+	}, [paused]);
 
-    <Post
-      title={"My first Firebase Hosting Assignment.| REACT APP"}
-      post={"https://assets.thehansindia.com/h-upload/2022/06/10/1297107-robbo.webp"}
-      logo={"https://cdn.pixabay.com/photo/2022/12/11/04/11/thumbs-up-7648171_640.png"}
-      name={"Jameel Kalam"}
-      time={"5h"}
-      content={"a well-organized and reputed organization where I can utilize all my efforts"}
-      thumb={"https://news.uchicago.edu/sites/default/files/styles/full_width/public/images/2023-07/Human%20aware%20AI%20hero.png?itok=BL5ceKsp"}
-      text={"Google Firebase Console"}
-      subtitle={"ChatGPT Next Web: One-Click to deploy your own ChatGPT web UI"}
-      reference={"ABC Refrence"}
-    />
+	const togglePause = () => {
+		setPaused(prevPaused => !prevPaused);
+	};
 
-    <Post
-      title={"9 Tips to Write Irresistible Blog Post Titles (With Examples!).| REACT APP"}
-      post={"https://assets.thehansindia.com/h-upload/2022/06/10/1297107-robbo.webp"}
-      logo={"https://i.kym-cdn.com/photos/images/newsfeed/002/355/520/773.png"}
-      name={"Subhan Ali"}
-      time={"4h"}
-      content={"a well-organized and reputed organization where I can utilize all my efforts"}
-      thumb={"https://www.chitkara.edu.in/blogs/wp-content/uploads/2022/05/artificial-intellegence.jpg"}
-      text={"Google Firebase Console"}
-      subtitle={"This facebook card is designed with React and hosted with Firebase Google"}
-      reference={"ChatGPT Next Web One-Click to deploy UI"}
-    />
+	const resetTimer = () => {
+		setCount(100);
+		setPaused(true);
+	};
 
-    <Post
-      title={"15 Types Of Blog Post Titles That Get Clicked: A Beginner’s Guide.| REACT APP"}
-      post={"https://assets.thehansindia.com/h-upload/2022/06/10/1297107-robbo.webp"}
-      logo={"https://uploads-ssl.webflow.com/646218c67da47160c64a84d5/64634bf3888b02605c3c69d3_86.png"}
-      name={"Nadir Aziz"}
-      time={"2h"}
-      content={"a well-organized and reputed organization where I can utilize all my efforts"}
-      thumb={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9NgGSYi_SWi-Rir-_AQplxYFTkkU8ylrhPg&usqp=CAU"}
-      text={"Google Firebase Console"}
-      subtitle={"This facebook card is designed with React and hosted with Firebase Google"}
-      reference={"ABC Refrence"}
-    />
+	return (
+		<div className="countdown-timer">
+			<h1>⏱ {count}</h1>
+			<button onClick={togglePause}>{paused ? '▶️ Start' : 'Pause ✋'}</button>
+			<button onClick={resetTimer}>Reset</button>
+		</div>
+	);
+};
 
-  </div>, document.querySelector("#root"));
+ReactDOM.render(<Home />, document.getElementById('root'));
