@@ -72,9 +72,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Getting Started with Firebase hosting
 <h1>Follow the instructions step by step:</h1>
-##npm install -g firebase-tools
-##firebase login
-##firebase init
-##firebase deploy
+<h2>npm install -g firebase-tools</h2>
+<h2>firebase login</h2>
+<h2>firebase init</h2>
+<h2>firebase deploy</h2>
 
 
